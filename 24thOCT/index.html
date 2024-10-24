@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem;
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .card {
+            min-width: 280px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-price {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .favorite-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: white;
+            border-radius: 50%;
+            padding: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .nav-button:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <button class="nav-button prev" onclick="navigate(-1)">←</button>
+        <button class="nav-button next" onclick="navigate(1)">→</button>
+        
+        <div class="carousel">
+            <div class="card">
+                <img src="https://inventstore.in/staging/wp-content/uploads/2023/05/airpods-pro-2nd-gen.webp" alt="Product 1">
+                <span class="favorite-icon">❤️</span>
+                <h3 class="card-title">Wireless Earbuds</h3>
+                <p class="card-price">₹12999.99</p>
+            </div>
+
+            <div class="card">
+                <img src="https://sekyo.in/cdn/shop/files/blue1_29abe25c-891e-4995-b9f7-724074c3377b.jpg?v=1722947315&width=2000" alt="Product 2">
+                <span class="favorite-icon">❤️</span>
+                <h3 class="card-title">Smart Watch</h3>
+                <p class="card-price">₹19999.99</p>
+            </div>
+
+            <div class="card">
+                <img src="https://www.artis.in/cdn/shop/products/1_f5b3377c-c870-420f-bc6a-5cd4b3a5a7c7.jpg" alt="Product 3">
+                <span class="favorite-icon">❤️</span>
+                <h3 class="card-title">Bluetooth Speaker</h3>
+                <p class="card-price">₹7909.99</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn.thewirecutter.com/wp-content/media/2023/11/fitness-tracker-2048px-5344.jpg?auto=webp&quality=75&crop=1.91:1&width=1200" alt="Product 4">
+                <span class="favorite-icon">❤️</span>
+                <h3 class="card-title">Fitness Tracker</h3>
+                <p class="card-price">₹8999.99</p>
+            </div>
+
+            <div class="card">
+                <img src="https://sony.scene7.com/is/image/sonyglobalsolutions/wh-ch720_Primary_image?$categorypdpnav$&fmt=png-alpha" alt="Product 5">
+                <span class="favorite-icon">❤️</span>
+                <h3 class="card-title">Wireless Headphones</h3>
+                <p class="card-price">₹149999.99</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const carousel = document.querySelector('.carousel');
+        const cards = document.querySelectorAll('.card');
+        let currentIndex = 0;
+        const cardWidth = 280 + 16;
+
+        function navigate(direction) {
+            const maxIndex = cards.length - Math.floor(carousel.offsetWidth / cardWidth);
+            currentIndex = Math.max(0, Math.min(currentIndex + direction, maxIndex));
+            carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        // Add click event listeners to favorite icons
+        document.querySelectorAll('.favorite-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.textContent = this.textContent === '❤️' ? '🤍' : '❤️';
+            });
+        });
+    </script>
+</body>
+</html>
